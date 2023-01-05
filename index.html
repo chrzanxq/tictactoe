@@ -1,0 +1,55 @@
+<html ng-app="ticTacToeApp">
+  <head>
+    <title>Tic-Tac-Toe</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+  </head>
+  <body ng-controller="GameController as game">
+    <form id="player-form">
+      <h2>Player 1</h2>
+      <label for="player1-name">Name:</label><br />
+      <input type="text" id="player1-name" /><br />
+      <label for="player1-age">Age:</label><br />
+      <input type="number" id="player1-age" /><br />
+      <br />
+      <h2>Player 2</h2>
+      <label for="player2-name">Name:</label><br />
+      <input type="text" id="player2-name" /><br />
+      <label for="player2-age">Age:</label><br />
+      <input type="number" id="player2-age" /><br />
+      <br />
+      <button type="submit">Submit</button>
+    </form>
+    <div id="player-names" style="display: none">
+      <p id="player1--name"></p>
+      vs.
+      <p id="player2--name"></p>
+    </div>
+    <div id="game-container" style="display: none">
+      <audio id="move-sound" src="bruh.mp3"></audio>
+      <h1>Tic-Tac-Toe</h1>
+      <table id="game-board" ng-class="{'winner': game.winner}"">
+        <tr ng-repeat="row in game.board">
+          <td
+            ng-repeat="cell in row"
+            ng-click="game.makeMove(cell)"
+            ng-class="{'x': cell.value === 'X', 'o': cell.value === 'O'}"
+          >
+            {{cell.value}}
+          </td>
+        </tr>
+      </table>
+      <div ng-show="game.winner">
+        <h2>{{game.winner}} wins!</h2>
+        <button ng-click="game.reset()">Play again</button>
+      </div>
+      <div ng-show="game.draw">
+        <h2>It's a draw!</h2>
+        <button ng-click="game.reset()">Play again</button>
+      </div>
+      <button id="toggle-dark-mode">Go Dark</button>
+    </div>
+    <script src="angular-animate.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
